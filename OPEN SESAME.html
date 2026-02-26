@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HB Stanley</title>
+
+<style>
+body{
+  margin:0;
+  overflow-x:hidden; /* allow vertical scroll */
+  background:#001f3f;
+  font-family:Arial;
+  text-align:center;
+  color:white;
+  min-height:100vh;
+}
+
+h1{
+  margin-top:80px;
+  font-size:3.5em;
+  letter-spacing:3px;
+  animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+  from{text-shadow:0 0 10px gold;}
+  to{text-shadow:0 0 30px gold;}
+}
+
+p{
+  font-size:1.8em;
+}
+
+.music{
+  position:absolute;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  background:gold;
+  padding:8px 12px;
+  border-radius:12px;
+  box-shadow:0 0 20px white;
+  z-index:10;
+}
+
+.gallery{
+  margin-top:30px;
+  display:flex;
+  justify-content:center;
+}
+
+.gallery img{
+  width:300px;
+  border-radius:20px;
+  box-shadow:0 0 30px gold;
+  cursor:pointer;
+  transition:transform .4s;
+}
+
+.gallery img:hover{
+  transform:scale(1.05);
+}
+
+.caption{
+  margin-top:10px;
+  font-size:1.2em;
+  color:gold;
+}
+
+.conclusion{
+  margin-top:60px;
+  margin-bottom:60px; /* space at bottom for scrolling */
+  font-size:1.6em;
+  color:#89CFF0;
+}
+
+.confetti{
+  position:absolute;
+  width:10px;
+  height:10px;
+  top:-10px;
+  opacity:.8;
+  animation:fall linear infinite;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+  }
+}
+
+.secret{
+  display:none;
+  font-size:2em;
+  margin-top:30px;
+  color:gold;
+}
+
+/* Cake Animations */
+.cake{
+  position:fixed;
+  font-size:55px;
+  z-index:20;
+  animation:
+    float 3s ease-in-out infinite,
+    spin 6s linear infinite,
+    cakeGlow 2s infinite alternate;
+}
+
+/* Positions */
+.top-left{ top:20px; left:20px; }
+.top-right{ top:20px; right:20px; }
+.bottom-left{ bottom:20px; left:20px; }
+.bottom-right{ bottom:20px; right:20px; }
+
+/* Floating movement */
+@keyframes float{
+  0%,100%{ transform:translateY(0px); }
+  50%{ transform:translateY(-18px); }
+}
+
+/* Smooth rotation */
+@keyframes spin{
+  from{ transform:rotate(0deg); }
+  to{ transform:rotate(360deg); }
+}
+
+/* Glow pulse */
+@keyframes cakeGlow{
+  from{ text-shadow:0 0 10px gold, 0 0 20px gold; }
+  to{ text-shadow:0 0 25px white, 0 0 40px gold; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="music">
+<audio id="music" controls autoplay loop>
+  <source src="https://raw.githubusercontent.com/sharleenkimono-git/stan-birthday/28611c7f18823e5d3cacb33740cc4a7caf2aa0b4/Kanye%20West%20-%20Good%20Morning.mp3" type="audio/mpeg">
+</audio>
+</div>
+
+<h1>🎉 HAPPY BIRTHDAY Stanley 🎉</h1>
+<p>SURPRISEEEEEE🎊🎊</p>
+<p>have a blast brother 🌑🍾🥳</p>
+<p>~~Nitakuekea kamia baadae😂</p>
+
+<div class="gallery">
+  <div>
+    <img src="https://i.imgur.com/pqhB6t6.jpeg" onclick="showSecret()">
+    <div class="caption">To more memories Stan💌</div>
+  </div>
+</div>
+
+<div class="conclusion">
+  ♥️❤️❤️
+</div>
+
+<div class="secret" id="secret">
+  🎂 Surprise! More memories loading...
+</div>
+
+<!-- Corner Cakes -->
+<div class="cake top-left">🎂</div>
+<div class="cake top-right">🎂</div>
+<div class="cake bottom-left">🎂</div>
+<div class="cake bottom-right">🎂</div>
+
+<script>
+window.addEventListener("load",()=>{
+  const music=document.getElementById("music");
+  music.play().catch(()=>{
+    document.body.addEventListener("click",()=>{
+      music.play();
+    },{once:true});
+  });
+});
+
+function showSecret(){
+  document.getElementById("secret").style.display="block";
+}
+
+const colors=["gold","white"];
+for(let i=0;i<170;i++){
+  const confetti=document.createElement("div");
+  confetti.classList.add("confetti");
+  document.body.appendChild(confetti);
+
+  confetti.style.left=Math.random()*100+"vw";
+  confetti.style.backgroundColor=colors[Math.floor(Math.random()*colors.length)];
+  confetti.style.width=Math.random()*8+5+"px";
+  confetti.style.height=confetti.style.width;
+  confetti.style.animationDuration=Math.random()*3+2+"s";
+  confetti.style.animationDelay=Math.random()*5+"s";
+  confetti.style.borderRadius=Math.random()>0.5?"50%":"0";
+}
+</script>
+
+</body>
+</html>
